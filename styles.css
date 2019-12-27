@@ -1,0 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+html, body {
+  font-family: 'Lato', sans-serif;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main {
+  min-width: 300px;
+  margin: 40px auto;
+  background: #4a4a4a;
+  border-radius: 10px;
+  padding: 30px;
+  color: #7e7e7e;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.4);
+}
+.results {
+  border-bottom: 1px solid currentColor;
+  text-align: right;
+  padding: 80px 5px 0 0;
+}
+.results .result {
+  font-size: 50px;
+  color: white;
+  margin: 10px 0;
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(30px, auto);
+  padding: 30px 5px 0;
+  justify-items: center;
+}
+.controls span {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease-in-out;
+}
+.controls span:hover {
+  transform: translateY(-3px)
+}
+.controls span:nth-child(4n) {
+  color: #e16667;
+}
+.controls span:nth-child(n+1):nth-child(-n+3) {
+  color: #c3c3c3;
+}
+.controls span:last-child {
+  background-color: #e16667;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 5px 5px 20px rgba(197, 36, 37, 0.34);
+}
