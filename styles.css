@@ -44,6 +44,13 @@ main {
   grid-auto-rows: minmax(30px, auto);
   padding: 30px 5px 15px;
   justify-items: center;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .controls span {
   cursor: pointer;
