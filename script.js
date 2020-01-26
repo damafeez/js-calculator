@@ -5,7 +5,8 @@ const maxResultLength = 9
 const maxCalculationLength = 20
 const lastInputIsOperator = inputs => isOperator(inputs[inputs.length - 1])
 const operatorIsRedundant = (inputs, value) => isOperator(value) && inputs.length && lastInputIsOperator(inputs)
-const contains = (list, value) => list.findIndex(element => element === value) > -1
+const operators = ['x', '/', '+', '-']
+
 const specialOperators = {
   '='() {
     calculation.length = 0
@@ -19,8 +20,8 @@ const specialOperators = {
     calculation.pop()
   },
   '.'() {
-    if (!calculation.length) calculation.push('0', '.')
-    else if (!contains(calculation, '.')) calculation.push('.')
+    if (!calculation.length || lastInputIsOperator(calculation)) calculation.push('0', '.')
+    else if (!lastNumber(calculation.join()).includes('.')) calculation.push('.')
   }
 }
 buttons.forEach(button => button.addEventListener('click', onClick))
@@ -53,19 +54,23 @@ function calculator(calculation) {
 }
 
 function isOperator(value) {
-  const operators = ['x', '/', '+', '-']
-  return contains(operators, value)
+  return operators.includes(value)
 }
 function isSpecialOperator(value) {
-  return contains(Object.keys(specialOperators), value)
+  return Object.keys(specialOperators).includes(value)
 }
 function isNumber(value) {
   const specialNumbers = ['0', 0]
-  return contains(specialNumbers, value) || !!parseFloat(value)
+  return specialNumbers.includes(value) || !!parseFloat(value)
 }
 function parseResult(result) {
   if (!isNumber(result)) return ''
   const _result = result.toPrecision(maxResultLength)
   const sliced = _result.length > maxResultLength ? _result.slice(0, maxResultLength) : _result
   return parseFloat(sliced)
+}
+function lastNumber(calculation = '') {
+  const re = new RegExp(`\\${operators.join('|\\')}`)
+  const splitted = calculation.split(re)
+  return splitted[splitted.length - 1]
 }
